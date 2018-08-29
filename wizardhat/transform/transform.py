@@ -133,3 +133,41 @@ class MNEFilter(MNETransformer):
 
     def stop(self):
         self._proceed = False
+
+class Filter(Transformer):
+    """General class for online data filtering with scipy
+
+     Expects a single data source (e.g. EEG) with consistent units.
+    """
+
+    def __init__(self, buffer_in)
+        self.similar_output
+        self.ch_names = self.buffer_in.ch_names
+        self.sfreq = self.buffer_in.sfreq
+
+        # initialize filter
+            # handle filter params
+            # design filter
+            # initial filter state self.zi
+
+        self.start()
+
+    def run(self):
+        # wait for buffer_in update
+        self.buffer_in.updated.wait()
+        self.buffer_in.updated.clear()
+
+        # get latest chunk
+        self._new = self.buffer_in.last_samples()
+
+        self.apply_filter()
+
+    def apply_filter(self):
+        timestamps = self._new['time']
+
+        for ch in self.ch_names:
+            self._new_filt, self.z = signal.lfilter(b, a, x, zi=self.z)
+
+        self.buffer_out.update()
+        
+                                                 
