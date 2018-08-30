@@ -153,5 +153,4 @@ flycheck_*.el
 .dir-locals.el
 
 # vscode settings
-.vscode/settings.json
-.vscode/launch.json
+.vscode/
